@@ -7,7 +7,6 @@ const createExpressApp = () => {
   const app: Application = express();
 
   // Express configuration
-  app.set("port", process.env.PORT || 3000);
 
   app.use(compression());
   app.use(express.urlencoded({ extended: true }));

@@ -3,10 +3,8 @@ import {
   ApolloServerPluginLandingPageGraphQLPlayground,
 } from "apollo-server-core";
 import { ApolloServer, ApolloServerExpressConfig } from "apollo-server-express";
-import { Application } from "express";
-import { GraphQLSchema } from "graphql";
 import depthLimit from "graphql-depth-limit";
-import { SubscriptionServer } from "subscriptions-transport-ws";
+import { IStartApolloServer } from "../@types/deceleration";
 
 const createContext = async ({ _, __, connection }: any) => {
   if (connection) {
@@ -25,15 +23,9 @@ export const createApolloServer = (config: ApolloServerExpressConfig) => {
   return server;
 };
 
-const startApolloServer = async ({
-  app,
-  schema,
-  subscriptionServer,
-}: {
-  app: Application;
-  schema: GraphQLSchema;
-  subscriptionServer: SubscriptionServer;
-}) => {
+const startApolloServer = async (config: IStartApolloServer) => {
+  const { subscriptionServer, schema, app } = config;
+
   const plugins = [
     {
       async serverWillStart() {

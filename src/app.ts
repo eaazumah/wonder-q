@@ -1,5 +1,6 @@
 import { createServer } from "http";
 import schema from "./graphql/schema";
+import applyRoutes from "./routes";
 import startApolloServer from "./server/apollo.server";
 import createExpressApp from "./server/create.express.app";
 import createSubscriptionServer from "./server/subscription.server";
@@ -8,8 +9,10 @@ const startApp = async () => {
   try {
     const PORT = process.env.PORT || 7000;
 
-    const app = createExpressApp();
+    let app = createExpressApp();
     const httpServer = createServer(app);
+
+    app = applyRoutes(app);
 
     const subscriptionServer = createSubscriptionServer({
       schema,

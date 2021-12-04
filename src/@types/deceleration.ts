@@ -1,7 +1,15 @@
+import { Application } from "express";
 import { GraphQLSchema } from "graphql";
 import { Server } from "http";
+import { SubscriptionServer } from "subscriptions-transport-ws";
 
 export interface ICreateSubscriptionServer {
   httpServer: Server;
   schema: GraphQLSchema;
+}
+
+export interface IStartApolloServer {
+  app: Application;
+  schema: GraphQLSchema;
+  subscriptionServer: SubscriptionServer;
 }

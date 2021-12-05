@@ -3,6 +3,11 @@ import * as queue from "../services/queue";
 
 const produce = (req: Request, res: Response) => {
   const { text } = req.body;
+  if (!text) {
+    return res.status(400).send({
+      error: 'PATH: [text] ;; MESSAGE: "text" is required',
+    });
+  }
   const message = queue.produce(text);
   res.status(201).send(message);
 };
@@ -23,7 +28,7 @@ const status = (req: Request, res: Response) => {
   }
 
   return res.status(200).send({
-    completed: false,
+    completed: true,
   });
 };
 

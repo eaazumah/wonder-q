@@ -1,0 +1,245 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API Service",
+    "version": "1.0.0",
+    "description": "API Service endpoints",
+    "contact": {
+      "email": "sidhant@panda.fyi",
+      "name": "Sidhant Panda"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:7000/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "WonderQ",
+      "description": "WonderQ APIs"
+    }
+  ],
+  "paths": {
+    "/api/produce": {
+      "post": {
+        "tags": ["WonderQ"],
+        "summary": "Add a message to the queue",
+        "operationId": "produce",
+        "requestBody": {
+          "description": "Adding new message to queue",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DraftMessageSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "message was added to the queue",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageSchema"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerErrorSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/consume": {
+      "get": {
+        "tags": ["WonderQ"],
+        "summary": "Get available message from queue",
+        "operationId": "consume",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Limit the number of message to consume"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "consume results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MessageSchema"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerErrorSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/completed/{id}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID of message completed to remove"
+          }
+        ],
+        "tags": ["WonderQ"],
+        "summary": "Remove completed message from the queue",
+        "operationId": "completed",
+        "responses": {
+          "204": {
+            "description": "Message completed"
+          }
+        }
+      }
+    },
+    "/api/status/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID of book to retrieve"
+          }
+        ],
+        "tags": ["WonderQ"],
+        "summary": "Retrieve a message status by ID",
+        "operationId": "status",
+        "responses": {
+          "200": {
+            "description": "Message status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageStatusSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BadRequestSchema": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message",
+            "example": "PATH: [text] ;; MESSAGE: \"text\" is required"
+          }
+        },
+        "required": ["error"]
+      },
+      "ServerErrorSchema": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message",
+            "example": "Internal server error"
+          }
+        },
+        "required": ["error"]
+      },
+      "DraftMessageSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "Name of the book",
+            "example": "The Hitchhiker's Guide to the Galaxy"
+          }
+        },
+        "required": ["text"]
+      },
+      "MessageSchema": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DraftMessageSchema"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id of the message",
+            "example": "IwjLqaiXRpqcxizUCHitX"
+          },
+          "createdAt": {
+            "type": "number",
+            "description": "Created at timestamp in miliseconds",
+            "example": 1616158942428
+          },
+          "availableAt": {
+            "type": "number",
+            "description": "available for consumption at timestamp in miliseconds",
+            "example": 1616158942428
+          }
+        },
+        "required": ["id", "createdAt", "availableAt"]
+      },
+      "MessageStatusSchema": {
+        "type": "object",
+        "properties": {
+          "completed": {
+            "type": "boolean",
+            "description": "message status",
+            "example": false
+          }
+        },
+        "required": ["completed"]
+      }
+    }
+  }
+}

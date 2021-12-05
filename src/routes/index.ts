@@ -13,9 +13,6 @@ const applyRoutes = (app: Application) => {
   app.use("/api", consumerRoutes);
 
   if (process.env.NODE_ENV !== "production") {
-    console.log(
-      "agajgoiuhsrjiojtyohijtoihjrtoiyhnrotynhrjtnhoityhnirtnhinoitynhjtnhkjfn kj b nitjhntritnityjhrytjljktnhrjtnhjktnhirrntiy"
-    );
     app.use("/dev/api-docs", swaggerUi.serve);
     app.get("/dev/api-docs", swaggerUi.setup(apiSpec, swaggerUiOptions));
   }

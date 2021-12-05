@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  wonder_q:
+    build:
+      context: .
+      target: dev
+    container_name: wonder_q
+    image: wonder_q
+    restart: unless-stopped
+    volumes:
+      - ./logs:/logs
+      - "./src:/app/src"
+      - "./node_modules:/app/node_modules"
+    environment:
+      - PORT=${PORT}
+      - NODE_ENV=${NODE_ENV}
+    ports:
+      - "${PORT}:${PORT}"

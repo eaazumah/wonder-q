@@ -8,9 +8,7 @@ const consume = async (req: Request, res: Response) => {
     res.send(messages);
   } catch (error) {
     res.status(500).send({
-      error: {
-        message: "Internal server error",
-      },
+      error: "Internal server error",
     });
   }
 };
@@ -18,7 +16,7 @@ const consume = async (req: Request, res: Response) => {
 const completed = (req: Request, res: Response) => {
   const id = req.params.id;
   queue.deleteMessage(id);
-  res.status(200).send();
+  res.status(204).send();
 };
 
 const ConsumerController = {

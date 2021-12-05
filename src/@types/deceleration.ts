@@ -13,3 +13,12 @@ export interface IStartApolloServer {
   schema: GraphQLSchema;
   subscriptionServer: SubscriptionServer;
 }
+
+export interface IMessage {
+  id: string;
+  text: string;
+  createdAt: number;
+  availableAt: number;
+}
+
+export interface IMessageQueue extends Array<IMessage> {}

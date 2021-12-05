@@ -1,6 +1,6 @@
 import { createServer } from "http";
 import schema from "./graphql/schema";
-import applyRoutes from "./routes";
+import applyRoutes from "./routes/index";
 import startApolloServer from "./server/apollo.server";
 import createExpressApp from "./server/create.express.app";
 import createSubscriptionServer from "./server/subscription.server";

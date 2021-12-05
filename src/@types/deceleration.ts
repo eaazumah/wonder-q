@@ -17,7 +17,7 @@ export interface IStartApolloServer {
 export interface IMessage {
   id: string;
   text: string;
-  createAt: number;
+  createdAt: number;
   availableAt: number;
 }
 

@@ -10,7 +10,7 @@
     "commit": "cz",
     "dev": "nodemon",
     "start": "node dist/src/app.js",
-    "test": "mocha"
+    "test": "mocha --exit"
   },
   "dependencies": {
     "apollo-server-express": "^3.5.0",

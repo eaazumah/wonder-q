@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  wonder_q:
+    build:
+      context: .
+    container_name: wonder_q
+    image: wonder_q
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      - ./logs:/logs
+    ports:
+      - "3000:3000"

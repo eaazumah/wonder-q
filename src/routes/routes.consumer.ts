@@ -1,13 +1,10 @@
 import express from "express";
+import ConsumerController from "../controllers/controllers.consumer";
 
 const router = express.Router();
 
-router.get("/consume", (req, res) => {
-  res.send([]);
-});
+router.get("/consume/", ConsumerController.consume);
 
-router.post("/notify", (req, res) => {
-  res.send(200);
-});
+router.delete("/completed/:id", ConsumerController.completed);
 
 export default router;

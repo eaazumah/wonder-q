@@ -16,15 +16,15 @@ const afterMilliseconds = (ms: number = 30000) => {
 /***
  * consume(read) a message to from messageQueue
  */
-const consume = (count: number = 10) => {
+const consume = (limit: number = 10) => {
   //filter  available messages using availableAt time stamp
   let availableMessages = messageQueue.filter((message) => {
     return message.availableAt <= Date.now();
   });
 
-  if (count < availableMessages.length) {
-    const start = availableMessages.length - count;
-    availableMessages = availableMessages.splice(start, count);
+  if (limit < availableMessages.length) {
+    const start = availableMessages.length - limit;
+    availableMessages = availableMessages.splice(start, limit);
   }
 
   const availableMessagesIds = availableMessages.map((message) => message.id);
@@ -47,8 +47,8 @@ const consume = (count: number = 10) => {
  * consume(read) concurrently a message to from messageQueue
  * concurrency is set to 1: one consume(read) at a time
  */
-const consumeConcurrently = (count?: number) => {
-  return concurrencyQueue.add(() => consume(count));
+const consumeConcurrently = (limit?: number) => {
+  return concurrencyQueue.add(() => consume(limit));
 };
 
 /***
@@ -62,6 +62,7 @@ const produce = (text: string) => {
     availableAt: Date.now(),
   };
   messageQueue = [message, ...messageQueue];
+  return message;
 };
 
 /***

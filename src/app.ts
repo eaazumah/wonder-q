@@ -4,6 +4,7 @@ import applyRoutes from "./routes/index";
 import startApolloServer from "./server/apollo.server";
 import createExpressApp from "./server/create.express.app";
 import createSubscriptionServer from "./server/subscription.server";
+import logResponseTime from "./utils/log-response-time";
 
 const startApp = async () => {
   try {
@@ -12,6 +13,7 @@ const startApp = async () => {
     let app = createExpressApp();
     const httpServer = createServer(app);
 
+    app.use(logResponseTime);
     app = applyRoutes(app);
 
     const subscriptionServer = createSubscriptionServer({

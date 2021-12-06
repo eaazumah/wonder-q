@@ -25,7 +25,7 @@ $ cd wonder-q
 #### 2. Install dependencies
 
 ```
-$ npm i
+$ yarn install
 ```
 
 ## II. Configuration
@@ -60,7 +60,7 @@ Running the above commands results in
 #### 1. Build and run without Docker
 
 ```
-$ npm run build && npm run start
+$ yarn build && yarn start
 ```
 
 #### 2. Run with docker

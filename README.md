@@ -128,6 +128,9 @@ The application uses [winston](https://github.com/winstonjs/winston) as the defa
 |   |   +-- subscription.server.ts
 |   +-- services
 |   |   +-- services.queue.ts
+|   +-- utils
+|   |   +-- log-response-time.ts
+|   |   +-- logger.ts
 |   +-- app.ts
 +-- .env.default
 +-- .eslintrc.json

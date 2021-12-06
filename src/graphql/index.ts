@@ -1,2 +1,7 @@
-export { default as GeneralResolvers } from './resolvers';
-export { default as GeneralTypeDefs } from './types';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import resolvers from './resolvers';
+import typeDefs from './types';
+
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+
+export default schema;

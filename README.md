@@ -116,7 +116,6 @@ The application uses [winston](https://github.com/winstonjs/winston) as the defa
 |   +-- grahpql
 |   |   +-- index.ts
 |   |   +-- resolvers.ts
-|   |   +-- schema.ts
 |   |   +-- types.ts
 |   +-- routes
 |   |   +-- index.ts

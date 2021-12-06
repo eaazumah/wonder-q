@@ -1,4 +1,4 @@
-FROM node:14 as base
+FROM node:14-alpine as base
 
 COPY yarn.lock ./
 COPY package.json ./
@@ -21,11 +21,12 @@ RUN yarn install
 RUN yarn build
 
 # ----------------- Production ---------------------#
-FROM gcr.io/distroless/nodejs:14
+FROM node:14-alpine
 
+COPY --from=build /package.json ./package.json
 COPY --from=build /node_modules ./node_modules
 COPY --from=build /dist /dist
 
 EXPOSE 3000
 
-CMD ["dist/src/app.js"]
+CMD ["npm", "run", "start"]

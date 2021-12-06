@@ -18,5 +18,5 @@ jobs:
                   node-version: '14'
             - run: npm install
             - run: npm test
-            - run: npm fix-lint
+            - run: npm run fix-lint
 

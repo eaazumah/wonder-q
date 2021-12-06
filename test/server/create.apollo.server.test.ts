@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import schema from '../../src/graphql/schema';
+import schema from '../../src/graphql/';
 import { createApolloServer } from '../../src/server/apollo.server';
 
 describe('apollo server check', () => {

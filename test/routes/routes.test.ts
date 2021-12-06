@@ -20,6 +20,9 @@ describe('Rest endpoints', () => {
         const res = await request(app).post('/api/produce').send({text:"new message"})
         expect(res.status).to.equal(201)
         expect(res.body.text).to.equal("new message")
+        expect(res.body).to.have.property('id')
+        expect(res.body).to.have.property('createdAt')
+        expect(res.body).to.have.property('availableAt')
     })
 
     it('should consume messages', async () => {

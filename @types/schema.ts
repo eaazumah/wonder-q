@@ -20,11 +20,9 @@ export type Query = {
   status: Scalars['Boolean'];
 };
 
-
 export type QueryConsumeArgs = {
   limit?: InputMaybe<Scalars['Int']>;
 };
-
 
 export type QueryStatusArgs = {
   id: Scalars['ID'];
@@ -44,11 +42,9 @@ export type Mutation = {
   produce: Message;
 };
 
-
 export type MutationCompletedArgs = {
   id: Scalars['ID'];
 };
-
 
 export type MutationProduceArgs = {
   text: Scalars['String'];

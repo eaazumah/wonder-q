@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import faker from "faker";
-import * as queue from "../../src/services/queue";
+import * as queue from "../../src/services/services.queue";
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 

@@ -2,18 +2,18 @@ import {
   MutationCompletedArgs,
   MutationProduceArgs,
   QueryConsumeArgs,
-  QueryStatusArgs,
-} from "../@types/schema";
-import * as queue from "../services/queue";
+  QueryStatusArgs
+} from '../../@types/schema';
+import * as queue from '../services/services.queue';
 
-const hello = () => "Hello world!";
+const hello = () => 'Hello world!';
 
 const status = (_: any, args: QueryStatusArgs) => {
-  const id = args.id;
+  const { id } = args;
 
   const messages = queue.getAllMessage();
 
-  const ids = messages.map((message) => message.id);
+  const ids = messages.map(message => message.id);
 
   const isInQueue = ids.includes(id);
 
@@ -28,12 +28,12 @@ const consume = (_: any, args: QueryConsumeArgs) => {
 };
 
 const produce = (_: any, args: MutationProduceArgs) => {
-  const text = args.text;
+  const { text } = args;
   return queue.produce(text);
 };
 
 const completed = (_: any, args: MutationCompletedArgs) => {
-  const id = args.id;
+  const { id } = args;
   queue.deleteMessage(id);
   return true;
 };
@@ -42,12 +42,12 @@ const resolvers = {
   Query: {
     hello,
     status,
-    consume,
+    consume
   },
   Mutation: {
     produce,
-    completed,
-  },
+    completed
+  }
 };
 
 export default resolvers;

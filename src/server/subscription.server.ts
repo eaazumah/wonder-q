@@ -1,7 +1,7 @@
-import { execute, subscribe } from "graphql";
-import { SubscriptionServer } from "subscriptions-transport-ws";
-import { ICreateSubscriptionServer } from "../@types/deceleration";
-import { createApolloServer } from "./apollo.server";
+import { execute, subscribe } from 'graphql';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
+import { ICreateSubscriptionServer } from '../../@types/deceleration';
+import { createApolloServer } from './apollo.server';
 
 const onConnect = () => {};
 
@@ -9,7 +9,7 @@ const createSubscriptionServer = (config: ICreateSubscriptionServer) => {
   const { schema, httpServer } = config;
 
   const server = createApolloServer({
-    schema,
+    schema
   });
 
   const subscriptionServer = SubscriptionServer.create(
@@ -17,11 +17,11 @@ const createSubscriptionServer = (config: ICreateSubscriptionServer) => {
       schema,
       execute,
       subscribe,
-      onConnect,
+      onConnect
     },
     {
       server: httpServer,
-      path: server.graphqlPath,
+      path: server.graphqlPath
     }
   );
 

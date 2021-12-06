@@ -1,10 +1,10 @@
-import { createServer } from "http";
-import schema from "./graphql/schema";
-import applyRoutes from "./routes/index";
-import startApolloServer from "./server/apollo.server";
-import createExpressApp from "./server/create.express.app";
-import createSubscriptionServer from "./server/subscription.server";
-import logResponseTime from "./utils/log-response-time";
+import { createServer } from 'http';
+import schema from './graphql/schema';
+import applyRoutes from './routes/index';
+import startApolloServer from './server/apollo.server';
+import createExpressApp from './server/create.express.app';
+import createSubscriptionServer from './server/subscription.server';
+import logResponseTime from './utils/log-response-time';
 
 const startApp = async () => {
   try {
@@ -18,17 +18,17 @@ const startApp = async () => {
 
     const subscriptionServer = createSubscriptionServer({
       schema,
-      httpServer,
+      httpServer
     });
 
     const apolloServer = await startApolloServer({
       app,
       schema,
-      subscriptionServer,
+      subscriptionServer
     });
 
     app.use((_req, res) => {
-      res.status(404).send("Unable to find the requested resource!");
+      res.status(404).send('Unable to find the requested resource!');
     });
 
     httpServer.listen(PORT, () => {

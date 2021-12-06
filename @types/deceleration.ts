@@ -1,7 +1,7 @@
-import { Application } from "express";
-import { GraphQLSchema } from "graphql";
-import { Server } from "http";
-import { SubscriptionServer } from "subscriptions-transport-ws";
+import { Application } from 'express';
+import { GraphQLSchema } from 'graphql';
+import { Server } from 'http';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
 
 export interface ICreateSubscriptionServer {
   httpServer: Server;

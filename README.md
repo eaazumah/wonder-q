@@ -105,7 +105,6 @@ The application uses [winston](https://github.com/winstonjs/winston) as the defa
 +-- .github
 |   +-- workflows
 |   |   +-- develop.yml
-|   |   +-- main.yml
 +-- @types
 |   +-- deceleration.ts
 |   +-- schema.ts

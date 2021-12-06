@@ -167,7 +167,7 @@ workflow
 
 Commits messages must follow **[Conventional Commits Spec](https://www.conventionalcommits.org/en/v1.0.0/)**
 
-Use npm run commit to commit messages
+Use yarn commit to commit messages
 
 ```
-$ npm run commit
+$ yarn commit

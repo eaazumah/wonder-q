@@ -1,6 +1,6 @@
 # WonderQ
 
-This repo can be used as a starting point for backend development with Nodejs. It comes bundled with Docker and is CI/CD optimized. The development environment uses `docker-compose` to start dependent services like mongo.
+WonderQ is a broker that allows producers to write to it, and consumers to read from it. It runs on a single server and has a single message queue. Whenever a producer writes to WonderQ, a message ID is generated and returned as confirmation. Whenever a consumer polls WonderQ for new messages, it can get those messages. These messages should NOT be available for processing by any other consumer that may be concurrently accessing WonderQ.
 
 A few things to note in the project:
 

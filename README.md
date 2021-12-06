@@ -92,7 +92,7 @@ To edit environment variables, create a file with name `.env` and copy the conte
 
 ## Logging
 
-The application uses [winston](https://github.com/winstonjs/winston) as the default logger. The configuration file is at `src/logger.ts`.
+The application uses [winston](https://github.com/winstonjs/winston) as the default logger. The configuration file is at `src/utils/logger.ts`.
 
 - All logs are saved in `./logs` directory and at `/logs` in the docker container.
 - The `docker-compose` file has a volume attached to container to expose host directory to the container for writing logs.

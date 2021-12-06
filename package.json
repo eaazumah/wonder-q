@@ -10,8 +10,9 @@
     "build": "tsc",
     "commit": "cz",
     "dev": "nodemon",
-    "start": "node dist/src/app.js",
-    "test": "mocha --exit"
+    "test": "mocha --exit",
+    "generate": "graphql-codegen",
+    "start": "node --experimental-modules --es-module-specifier-resolution=node dist/src/app.js"
   },
   "dependencies": {
     "apollo-server-express": "^3.5.0",
@@ -30,6 +31,8 @@
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
+    "@graphql-codegen/cli": "^2.3.0",
+    "@graphql-codegen/typescript": "^2.4.1",
     "@graphql-tools/schema": "^8.3.1",
     "@types/chai": "^4.2.22",
     "@types/compression": "^1.7.2",

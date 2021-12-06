@@ -4,6 +4,7 @@ COPY yarn.lock ./
 COPY package.json ./
 
 COPY src ./src
+COPY @types ./@types
 COPY tsconfig.json .
 COPY openapi.json ./
 COPY tsconfig.build.json ./

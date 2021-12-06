@@ -1,15 +1,15 @@
 import {
   ApolloServerPluginLandingPageDisabled,
-  ApolloServerPluginLandingPageGraphQLPlayground,
-} from "apollo-server-core";
-import { ApolloServer, ApolloServerExpressConfig } from "apollo-server-express";
-import depthLimit from "graphql-depth-limit";
-import { IStartApolloServer } from "../@types/deceleration";
+  ApolloServerPluginLandingPageGraphQLPlayground
+} from 'apollo-server-core';
+import { ApolloServer, ApolloServerExpressConfig } from 'apollo-server-express';
+import depthLimit from 'graphql-depth-limit';
+import { IStartApolloServer } from '../../@types/deceleration';
 
 const createContext = async ({ _, __, connection }: any) => {
   if (connection) {
     return {
-      ...connection.context,
+      ...connection.context
     };
   }
 
@@ -18,7 +18,7 @@ const createContext = async ({ _, __, connection }: any) => {
 
 export const createApolloServer = (config: ApolloServerExpressConfig) => {
   const server = new ApolloServer({
-    ...config,
+    ...config
   });
   return server;
 };
@@ -32,13 +32,13 @@ const startApolloServer = async (config: IStartApolloServer) => {
         return {
           async drainServer() {
             subscriptionServer.close();
-          },
+          }
         };
-      },
+      }
     },
-    process.env.NODE_ENV === "production"
+    process.env.NODE_ENV === 'production'
       ? ApolloServerPluginLandingPageDisabled()
-      : ApolloServerPluginLandingPageGraphQLPlayground(),
+      : ApolloServerPluginLandingPageGraphQLPlayground()
   ];
 
   const server = createApolloServer({
@@ -46,7 +46,7 @@ const startApolloServer = async (config: IStartApolloServer) => {
     plugins,
     introspection: true,
     context: createContext,
-    validationRules: [depthLimit(6)],
+    validationRules: [depthLimit(6)]
   });
 
   await server.start();

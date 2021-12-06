@@ -1,11 +1,11 @@
 version: "3"
 
 services:
-  wonder_q:
+  wonder-q:
     build:
       context: .
-    container_name: wonder_q
-    image: wonder_q
+    container_name: wonder-q
+    image: wonder-q
     restart: unless-stopped
     environment:
       - NODE_ENV=production

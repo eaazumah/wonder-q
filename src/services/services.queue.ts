@@ -1,6 +1,6 @@
-import { nanoid } from "nanoid";
-import PQueue from "p-queue";
-import { IMessageQueue } from "../@types/deceleration";
+import { nanoid } from 'nanoid';
+import PQueue from 'p-queue';
+import { IMessageQueue } from '../../@types/deceleration';
 
 let availabilityPeriod = 60000;
 let messageQueue: IMessageQueue = [];
@@ -13,28 +13,28 @@ const afterMilliseconds = (ms: number = 30000) => {
   return now.getTime();
 };
 
-/***
+/** *
  * consume(read) a message to from messageQueue
  */
 const consume = (limit: number = 10) => {
-  //filter  available messages using availableAt time stamp
-  let availableMessages = messageQueue.filter((message) => {
-    return message.availableAt <= Date.now();
-  });
+  // filter  available messages using availableAt time stamp
+  let availableMessages = messageQueue.filter(
+    message => message.availableAt <= Date.now()
+  );
 
   if (limit < availableMessages.length) {
     const start = availableMessages.length - limit;
     availableMessages = availableMessages.splice(start, limit);
   }
 
-  const availableMessagesIds = availableMessages.map((message) => message.id);
+  const availableMessagesIds = availableMessages.map(message => message.id);
 
   // update message visibility with availabilityPeriod
-  messageQueue = messageQueue.map((message) => {
+  messageQueue = messageQueue.map(message => {
     if (availableMessagesIds.includes(message.id)) {
       return {
         ...message,
-        availableAt: afterMilliseconds(availabilityPeriod),
+        availableAt: afterMilliseconds(availabilityPeriod)
       };
     }
     return message;
@@ -43,15 +43,13 @@ const consume = (limit: number = 10) => {
   return availableMessages;
 };
 
-/***
+/** *
  * consume(read) concurrently a message to from messageQueue
  * concurrency is set to 1: one consume(read) at a time
  */
-const consumeConcurrently = (limit?: number) => {
-  return concurrencyQueue.add(() => consume(limit));
-};
+const consumeConcurrently = (limit?: number) => concurrencyQueue.add(() => consume(limit));
 
-/***
+/** *
  * produce(create or add) a message to from messageQueue
  */
 const produce = (text: string) => {
@@ -59,38 +57,34 @@ const produce = (text: string) => {
     text,
     id: nanoid(),
     createdAt: Date.now(),
-    availableAt: Date.now(),
+    availableAt: Date.now()
   };
   messageQueue = [message, ...messageQueue];
   return message;
 };
 
-/***
+/** *
  * deleteMessage a message by id from messageQueue
  */
 const deleteMessage = (id: string) => {
-  messageQueue = messageQueue.filter((message) => {
-    return message.id !== id;
-  });
+  messageQueue = messageQueue.filter(message => message.id !== id);
 };
 
-/***
+/** *
  * clearMessages from messageQueue
  */
 const clearMessages = () => {
   messageQueue = [];
 };
 
-/***
+/** *
  * setAvailabilityPeriod for message
  */
 const setAvailabilityPeriod = (ms: number) => {
   availabilityPeriod = ms;
 };
 
-const getAllMessage = () => {
-  return messageQueue;
-};
+const getAllMessage = () => messageQueue;
 
 export {
   produce,
@@ -99,5 +93,5 @@ export {
   getAllMessage,
   deleteMessage,
   consumeConcurrently,
-  setAvailabilityPeriod,
+  setAvailabilityPeriod
 };

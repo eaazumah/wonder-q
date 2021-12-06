@@ -24,6 +24,12 @@ $ cd wonder-q
 
 #### 2. Install dependencies
 
+if yarn is not install
+
+```
+$ npm install --global yarn
+```
+
 ```
 $ yarn install
 ```

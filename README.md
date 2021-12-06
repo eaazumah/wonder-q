@@ -57,8 +57,6 @@ Running the above commands results in
 
 ## IV. Packaging and Deployment
 
-The mongo container is only only available in dev environment. When you build and deploy the docker image, be sure to provide the correct **[environment variables](#environment)**.
-
 #### 1. Build and run without Docker
 
 ```
@@ -149,3 +147,20 @@ The application uses [winston](https://github.com/winstonjs/winston) as the defa
 +-- tsconfig.json
 +-- yarn.json
 ```
+
+## III. Contribution
+
+### Git Workflow
+
+Contribution to this project must follow the
+**[GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow#:~:text=Gitflow%20is%20a%20legacy%20Git,software%20development%20and%20DevOps%20practices.)**
+workflow
+
+### Commits
+
+Commits messages must follow **[Conventional Commits Spec](https://www.conventionalcommits.org/en/v1.0.0/)**
+
+Use npm run commit to commit messages
+
+```
+$ npm run commit
